@@ -3,8 +3,8 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UsersService } from './users.service';
 import { UUID } from 'crypto';
 import { updateUserDto } from './dto/updateUser.dto';
-import { AuthenticationGuard } from 'src/guards/authentication.guard';
-import { ChangePasswordDTO } from 'src/rol/dto/changePassword.dto';
+
+import { ChangePasswordDTO } from 'src/users/dto/changePassword.dto';
 
 
 @Controller('users')
@@ -14,7 +14,7 @@ constructor(private userService:UsersService){}
  createUser(@Body() newUser:CreateUserDto){
  return  this.userService.createUser(newUser);
 }
-@UseGuards(AuthenticationGuard)
+
 @Get()
 getUser(){
   return this.userService.getUser();

@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { InjectRepository, getRepositoryToken } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import {  Repository } from 'typeorm';
 import { Permiso } from './permiso.entity';
 import { CreatePermisoDto } from './dto/createPermiso.dto';
 import { UpdatePermisoDto } from './dto/updatePermiso.dto';
@@ -16,7 +16,6 @@ export class PermisoService {
       nombre:permiso.nombre
     }
    })
-   console.log(currentPermiso+"SOY EL ERROR");
 
    if(currentPermiso){
     return new HttpException("Permiso ya existe",409);

@@ -4,7 +4,7 @@ import { User } from './users.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { updateUserDto } from './dto/updateUser.dto';
-import { ChangePasswordDTO } from 'src/rol/dto/changePassword.dto';
+import { ChangePasswordDTO } from 'src/users/dto/changePassword.dto';
 import * as bcrypt from 'bcrypt';
 
 
@@ -69,6 +69,7 @@ export class UsersService {
     contraChanged.contrasenaActual,
     (await existsUser).contraseña
   );
+
   const nuevaContraseñaEncryptada=await this.encryptarContraseña(contraChanged.nuevaContrasena)
   if (match) {
   return  await this.userRepository.update({id: id}, {contraseña: nuevaContraseñaEncryptada});

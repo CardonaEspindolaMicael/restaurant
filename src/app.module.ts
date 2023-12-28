@@ -4,6 +4,7 @@ import {TypeOrmModule} from '@nestjs/typeorm'
 import { RolModule } from './rol/rol.module';
 import { PermisoModule } from './permiso/permiso.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import "dotenv/config.js"; 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import "dotenv/config.js";
     UsersModule,
     RolModule,
     PermisoModule,
+    AuthModule,
     ],
   controllers: [],
   providers: [],
