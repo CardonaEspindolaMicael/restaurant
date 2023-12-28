@@ -4,6 +4,8 @@ import { User } from './users.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { updateUserDto } from './dto/updateUser.dto';
+import { ChangePasswordDTO } from 'src/rol/dto/changePassword.dto';
+import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
@@ -21,7 +23,7 @@ export class UsersService {
   if(currentUser){
     return new HttpException('User already exist',HttpStatus.CONFLICT);
   }
-
+   user.contraseña=(await this.encryptarContraseña(user.contraseña));
   const newUser=this.userRepository.create(user);
   return this.userRepository.save(newUser);
   }
@@ -46,4 +48,34 @@ export class UsersService {
     return await this.userRepository.update({id},user)
 
   }
+  async encryptarContraseña(contraseña:string) {
+    const salt = await bcrypt.genSalt(5);
+    const newHash = await bcrypt.hash(contraseña, salt);
+    return newHash;
+  }
+
+  async cambiarContraseña(id:string,contraChanged:ChangePasswordDTO){
+  const existsUser= this.userRepository.findOne({
+    where:{
+      id:id
+    }
+  })
+  if(!existsUser){
+    return new HttpException('User not exists',HttpStatus.CONFLICT);
+  }
+   
+ 
+  const match = await bcrypt.compare(
+    contraChanged.contrasenaActual,
+    (await existsUser).contraseña
+  );
+  const nuevaContraseñaEncryptada=await this.encryptarContraseña(contraChanged.nuevaContrasena)
+  if (match) {
+  return  await this.userRepository.update({id: id}, {contraseña: nuevaContraseñaEncryptada});
+} else {
+    throw new HttpException('Contraseña no coinciden', HttpStatus.AMBIGUOUS);
+}
+  
+  }
+
 }

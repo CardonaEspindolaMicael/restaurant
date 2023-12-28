@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UsersService } from './users.service';
 import { UUID } from 'crypto';
 import { updateUserDto } from './dto/updateUser.dto';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
+import { ChangePasswordDTO } from 'src/rol/dto/changePassword.dto';
+
 
 @Controller('users')
 export class UsersController {
@@ -11,7 +14,7 @@ constructor(private userService:UsersService){}
  createUser(@Body() newUser:CreateUserDto){
  return  this.userService.createUser(newUser);
 }
-
+@UseGuards(AuthenticationGuard)
 @Get()
 getUser(){
   return this.userService.getUser();
@@ -31,5 +34,10 @@ deleteUser(@Param('id') id:UUID){
 @Put(':id')
 updateUser(@Param('id') id:UUID, @Body() user:updateUserDto){
 return this.userService.updateUser(id,user);
+}
+
+@Put('cambiarContrasena/:id')
+cambiarContraseña(@Param('id') id:UUID,@Body() contraChanged:ChangePasswordDTO){
+return this.userService.cambiarContraseña(id,contraChanged)
 }
 }
