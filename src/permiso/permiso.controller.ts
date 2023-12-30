@@ -4,6 +4,7 @@ import { UUID } from 'crypto';
 import { CreatePermisoDto } from './dto/createPermiso.dto';
 import { UpdatePermisoDto } from './dto/updatePermiso.dto';
 
+
 @Controller('permiso')
 export class PermisoController {
 

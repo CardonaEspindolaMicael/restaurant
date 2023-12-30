@@ -9,10 +9,12 @@ import { insertRolPermiso } from './dto/insertRolPermiso.dto';
 export class RolController {
 
   constructor(private rolService:RolService){}
+ 
   @Post()
   createRoles(@Body() user:CreateRolDto){
     return this.rolService.createRol(user);
   }
+
   @Get()
   getRoles(){
   return this.rolService.getRol();

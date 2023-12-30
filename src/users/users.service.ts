@@ -23,7 +23,7 @@ export class UsersService {
   if(currentUser){
     return new HttpException('User already exist',HttpStatus.CONFLICT);
   }
-   user.contraseña=(await this.encryptarContraseña(user.contraseña));
+   user.contrasena=(await this.encryptarContraseña(user.contrasena));
   const newUser=this.userRepository.create(user);
   return this.userRepository.save(newUser);
   }
@@ -67,12 +67,12 @@ export class UsersService {
  
   const match = await bcrypt.compare(
     contraChanged.contrasenaActual,
-    (await existsUser).contraseña
+    (await existsUser).contrasena
   );
 
   const nuevaContraseñaEncryptada=await this.encryptarContraseña(contraChanged.nuevaContrasena)
   if (match) {
-  return  await this.userRepository.update({id: id}, {contraseña: nuevaContraseñaEncryptada});
+  return  await this.userRepository.update({id: id}, {contrasena: nuevaContraseñaEncryptada});
 } else {
     throw new HttpException('Contraseña no coinciden', HttpStatus.AMBIGUOUS);
 }

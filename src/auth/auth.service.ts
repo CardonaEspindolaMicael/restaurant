@@ -19,7 +19,7 @@ export class AuthService {
     });
     const match = await bcrypt.compare(
       loginUser.pass,
-      user.contraseña
+      user.contrasena
     );
     if (!!!match) {
       throw new UnauthorizedException();

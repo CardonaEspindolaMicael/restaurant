@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Rol } from './rol.entity';
 import { Permiso } from 'src/permiso/permiso.entity';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Module({
   imports:[TypeOrmModule.forFeature([Rol,Permiso])],

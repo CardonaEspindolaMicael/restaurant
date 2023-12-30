@@ -5,6 +5,7 @@ import { RolModule } from './rol/rol.module';
 import { PermisoModule } from './permiso/permiso.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { InsumoModule } from './insumo/insumo.module';
 import "dotenv/config.js"; 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import "dotenv/config.js";
     RolModule,
     PermisoModule,
     AuthModule,
+    InsumoModule,
     ],
   controllers: [],
   providers: [],

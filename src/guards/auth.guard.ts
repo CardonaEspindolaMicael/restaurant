@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants } from './auth.constants';
+import { jwtConstants } from 'src/auth/auth.constants';
 import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/decorator/public.decorator';
 import { Reflector } from '@nestjs/core';
