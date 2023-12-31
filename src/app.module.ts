@@ -6,6 +6,9 @@ import { PermisoModule } from './permiso/permiso.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { InsumoModule } from './insumo/insumo.module';
+import { ProductoModule } from './producto/producto.module';
+import { MesaModule } from './mesa/mesa.module';
+import { PedidoModule } from './pedido/pedido.module';
 import "dotenv/config.js"; 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import "dotenv/config.js";
     PermisoModule,
     AuthModule,
     InsumoModule,
+    ProductoModule,
+    MesaModule,
+    PedidoModule,
     ],
   controllers: [],
   providers: [],

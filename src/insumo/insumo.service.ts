@@ -11,15 +11,7 @@ export class InsumoService {
 
   }
   async createInsumo(createInsumoDto: CreateInsumoDto) {
-    const existsInsumo=await this.insumoRepository.findOne({
-      where:{
-        nombre:(createInsumoDto.nombre).trim()
-      }
-    })
 
-    if(existsInsumo){
-      return new HttpException(`el insumo con nombre ${createInsumoDto.nombre} ya existe`,HttpStatus.CONFLICT)
-    }
     const newInsumo=this.insumoRepository.create(createInsumoDto);
     return this.insumoRepository.save(newInsumo);
     
@@ -29,15 +21,24 @@ export class InsumoService {
     return this.insumoRepository.find();
   }
 
-  findOneInsumo(id: number) {
-    return `This action returns a #${id} insumo`;
+  findOneInsumo(id: string) {
+    return this.insumoRepository.findOne({where:{
+      id:id
+    }});
   }
 
-  updateInsumo(id: number, updateInsumoDto: UpdateInsumoDto) {
-    return `This action updates a #${id} insumo`;
+  async updateInsumo(id: string, updateInsumoDto: UpdateInsumoDto) {
+    const existsInsumo=await this.insumoRepository.findOne({
+      where:{
+        id:id
+      }
+    })
+    
+    return existsInsumo ? this.insumoRepository.update({id},updateInsumoDto) : new HttpException('el insumo no existe',HttpStatus.NOT_FOUND) ;
   }
 
-  removeInsumo(id: number) {
+  async removeInsumo(id: string) {
+    await this.insumoRepository.delete({id})
     return `This action removes a #${id} insumo`;
   }
 }

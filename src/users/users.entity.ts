@@ -2,6 +2,7 @@ import { IsDate, IsEmail} from "class-validator";
 import { Entity,Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { Rol } from "../rol/rol.entity";
 import { Insumo } from "../insumo/entities/insumo.entity";
+import { Pedido } from "../pedido/entities/pedido.entity";
 
 export enum generos{
     masculino = "M",
@@ -33,8 +34,9 @@ export class User{
   id_rol:String
   @OneToMany(()=>Insumo,(insumo)=>insumo.user)
   insumo:Insumo[]
+  @OneToMany(()=>Pedido,(pedido)=> pedido.user)
+  pedido:Pedido[]
   @ManyToOne(()=>Rol, rol=> rol.id)
   @JoinColumn({name:'id_rol'})
   rol:Rol;
-
 }

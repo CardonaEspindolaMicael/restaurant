@@ -4,7 +4,8 @@ import { UsersService } from './users.service';
 import { UUID } from 'crypto';
 import { updateUserDto } from './dto/updateUser.dto';
 
-import { ChangePasswordDTO } from 'src/users/dto/changePassword.dto';
+import { ChangePasswordDTO } from './dto/changePassword.dto';
+
 
 
 @Controller('users')

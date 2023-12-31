@@ -19,16 +19,16 @@ export class InsumoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.insumoService.findOneInsumo(+id);
+    return this.insumoService.findOneInsumo(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateInsumoDto: UpdateInsumoDto) {
-    return this.insumoService.updateInsumo(+id, updateInsumoDto);
+    return this.insumoService.updateInsumo(id, updateInsumoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.insumoService.removeInsumo(+id);
+    return this.insumoService.removeInsumo(id);
   }
 }
